@@ -37,6 +37,7 @@
 		<p id="result_field_all"></p>
 	</body>
 	<script>
+
 		var transform_fnl = function(value)
 		{
 			var res = value.split(/[^a-z]/i);
@@ -85,6 +86,7 @@
 			});
 			return (retour);
 		}
+
 		var transform_first = function(value)
 		{
 			var res = value.split(/[^a-z]/i);
@@ -128,6 +130,7 @@
 			});
 			return (retour);
 		}
+
 		var transform_all = function(value)
 		{
 			var res = value.split(/[^a-z]/i);
@@ -164,6 +167,7 @@
 			});
 			return (retour);
 		}
+
 		input_field.oninput = function()
 		{
 			// result fields only appear if something inside input
