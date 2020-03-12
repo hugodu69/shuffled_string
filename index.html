@@ -40,7 +40,7 @@
 
 		var transform_fnl = function(value)
 		{
-			var res = value.split(/[^a-z]/i);
+			var res = value.split(/[^A-Za-zÀ-ÖØ-öø-ÿ]/);
 			var tmp = [];
 			var str = "";
 			var concat = "";
@@ -72,6 +72,7 @@
 				else
 					last = '';
 				concat = first + middle + last;
+				console.log(concat);
 				tmp.push(concat);
 				str = tmp.join(" ");
 			});
@@ -79,7 +80,7 @@
 			var test = value.split("").join("");
 			str.split("").forEach((element, i) =>
 			{
-				if (test.charAt(i).match(/[^a-z]/i))
+				if (test.charAt(i).match(/[^A-Za-zÀ-ÖØ-öø-ÿ]/))
 					retour += test.charAt(i);
 				else
 					retour += str.charAt(i);
@@ -89,7 +90,7 @@
 
 		var transform_first = function(value)
 		{
-			var res = value.split(/[^a-z]/i);
+			var res = value.split(/[^A-Za-zÀ-ÖØ-öø-ÿ]/);
 			var tmp = [];
 			var str = "";
 			var concat = "";
@@ -123,7 +124,7 @@
 			var test = value.split("").join("");
 			str.split("").forEach((element, i) =>
 			{
-				if (test.charAt(i).match(/[^a-z]/i))
+				if (test.charAt(i).match(/[^A-Za-zÀ-ÖØ-öø-ÿ]/))
 					retour += test.charAt(i);
 				else
 					retour += str.charAt(i);
@@ -133,7 +134,7 @@
 
 		var transform_all = function(value)
 		{
-			var res = value.split(/[^a-z]/i);
+			var res = value.split(/[^A-Za-zÀ-ÖØ-öø-ÿ]/);
 			var tmp = [];
 			var str = "";
 			var middle;
@@ -160,7 +161,7 @@
 			var test = value.split("").join("");
 			str.split("").forEach((element, i) =>
 			{
-				if (test.charAt(i).match(/[^a-z]/i))
+				if (test.charAt(i).match(/[^A-Za-zÀ-ÖØ-öø-ÿ]/))
 					retour += test.charAt(i);
 				else
 					retour += str.charAt(i);
