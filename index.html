@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title></title>
+		<meta name="description" content="description du site web">
+		<meta name="keywords" content="truc, bidule, chouette">
+		<style>
+			body {
+				display: block;
+			}
+			#input_field {
+				width: 100%;
+				max-width: 500px;
+			}
+			#result_field {
+				width: 100%;
+				max-width: 500px;
+			}
+			p {
+				width: 100%;
+				max-width: 500px;
+			}
+			.title {
+				color: rgba(100, 100, 100, 0.7);
+			}
+		</style>
+	</head>
+	<body>
+		<textarea id="input_field" placeholder="saisissez ici votre texte saisissant" autofocus></textarea>
+		<p id="title_fnl" class="title"></p>
+		<p id="result_field_fnl"></p>
+		<p id="title_first" class="title"></p>
+		<p id="result_field_first"></p>
+		<p id="title_all" class="title"></p>
+		<p id="result_field_all"></p>
+	</body>
+	<script>
+		var transform_fnl = function(value)
+		{
+			var res = value.split(/[^a-z]/i);
+			var tmp = [];
+			var str = "";
+			var concat = "";
+			var middle = "";
+			var first = '';
+			var last = '';
+			var shuffled = "";
+			res.forEach(word =>
+			{
+				if (word.length < 2)
+					middle = "";
+				else
+				{
+					middle = word.substring(1, word.length - 1);
+					if (middle.length > 1)
+					{
+						shuffled = middle.split('').sort(function(){return 0.5-Math.random()}).join('');
+						while (middle === shuffled && middle.split("").some(e => e != middle[0]))
+							shuffled = middle.split('').sort(function(){return 0.5-Math.random()}).join('');
+						middle = shuffled;
+					}
+				}
+				if (word.length >= 1)
+					first = word[0];
+				else
+					first = '';
+				if (word.length >= 2)
+					last = word[word.length - 1];
+				else
+					last = '';
+				concat = first + middle + last;
+				tmp.push(concat);
+				str = tmp.join(" ");
+			});
+			var retour = "";
+			var test = value.split("").join("");
+			str.split("").forEach((element, i) =>
+			{
+				if (test.charAt(i).match(/[^a-z]/i))
+					retour += test.charAt(i);
+				else
+					retour += str.charAt(i);
+			});
+			return (retour);
+		}
+		var transform_first = function(value)
+		{
+			var res = value.split(/[^a-z]/i);
+			var tmp = [];
+			var str = "";
+			var concat = "";
+			var middle = "";
+			var first = '';
+			var shuffled = "";
+			res.forEach(word =>
+			{
+				if (word.length < 2)
+					middle = "";
+				else
+				{
+					middle = word.substring(1, word.length);
+					if (middle.length > 1)
+					{
+						shuffled = middle.split('').sort(function(){return 0.5-Math.random()}).join('');
+						while (middle === shuffled && middle.split("").some(e => e != middle[0]))
+							shuffled = middle.split('').sort(function(){return 0.5-Math.random()}).join('');
+						middle = shuffled;
+					}
+				}
+				if (word.length >= 1)
+					first = word[0];
+				else
+					first = '';
+				concat = first + middle;
+				tmp.push(concat);
+				str = tmp.join(" ");
+			});
+			var retour = "";
+			var test = value.split("").join("");
+			str.split("").forEach((element, i) =>
+			{
+				if (test.charAt(i).match(/[^a-z]/i))
+					retour += test.charAt(i);
+				else
+					retour += str.charAt(i);
+			});
+			return (retour);
+		}
+		var transform_all = function(value)
+		{
+			var res = value.split(/[^a-z]/i);
+			var tmp = [];
+			var str = "";
+			var middle;
+			var shuffled;
+			res.forEach(word =>
+			{
+				if (word.length < 1)
+					middle = "";
+				else
+				{
+					middle = word;
+					if (middle.length > 1)
+					{
+						shuffled = middle.split('').sort(function(){return 0.5-Math.random()}).join('');
+						while (middle === shuffled && middle.split("").some(e => e != middle[0]))
+							shuffled = middle.split('').sort(function(){return 0.5-Math.random()}).join('');
+						middle = shuffled;
+					}
+				}
+				tmp.push(middle);
+				str = tmp.join(" ");
+			});
+			var retour = "";
+			var test = value.split("").join("");
+			str.split("").forEach((element, i) =>
+			{
+				if (test.charAt(i).match(/[^a-z]/i))
+					retour += test.charAt(i);
+				else
+					retour += str.charAt(i);
+			});
+			return (retour);
+		}
+		input_field.oninput = function()
+		{
+			// result fields only appear if something inside input
+			if (input_field.value === "")
+			{
+				title_fnl.innerHTML = "";
+				title_first.innerHTML = "";
+				title_all.innerHTML = "";
+			}
+			else
+			{
+				title_fnl.innerHTML = "premiere et derniere lettres en positions :";
+				title_first.innerHTML = "juste premiere lettre en position :";
+				title_all.innerHTML = "toutes les lettres melangees :";
+			}
+			result_field_fnl.innerHTML = transform_fnl(input_field.value);
+			result_field_first.innerHTML = transform_first(input_field.value);
+			result_field_all.innerHTML = transform_all(input_field.value);
+		}
+	</script>
+</html>
